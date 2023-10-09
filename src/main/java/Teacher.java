@@ -3,7 +3,8 @@ import java.util.UUID;
 import static java.util.UUID.randomUUID;
 
 public class Teacher {
-    private String teacherId= UUID.randomUUID().toString();
+
+    private final String teacherId= UUID.randomUUID().toString().substring(0,5);
     private  String name;
     private double salary;
 
@@ -16,11 +17,6 @@ public class Teacher {
     public String getTeacherId() {
         return teacherId;
     }
-
-  /*  public void setTeacherId() {
-        this.teacherId = teacherId;
-    }
-*/
 
 
     public String getName() {

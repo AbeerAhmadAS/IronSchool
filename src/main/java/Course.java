@@ -1,7 +1,9 @@
+import java.util.List;
 import java.util.UUID;
 
+
 public class Course {
-    private  String courseId= UUID.randomUUID().toString();
+    private final String courseId= UUID.randomUUID().toString().substring(0,5);
     private String name;
     private double price;
     private double money_earned;
@@ -12,13 +14,10 @@ public class Course {
         this.price = price;
     }
 
+
     public String getCourseId() {
         return courseId;
     }
-
-   /* public void setCourseId() {
-        this.courseId = UUID.randomUUID().toString();
-    }*/
 
     public String getName() {
         return name;

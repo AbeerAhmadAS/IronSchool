@@ -1,7 +1,7 @@
 import java.util.UUID;
 
 public class Student {
-    private String studentId= UUID.randomUUID().toString();
+    private final String studentId= UUID.randomUUID().toString().substring(0,5);
     private String name;
     private String address;
     private String email;
