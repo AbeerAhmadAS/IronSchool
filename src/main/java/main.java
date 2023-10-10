@@ -19,7 +19,8 @@ public class main {
         while (check) {
 
 
-            System.out.print("""Enter number of commend:\n "
+            System.out.println( """
+                                  Enter number of commend:
                                  1- ENROLL
                                  2- ASSIGN
                                  3-  SHOW COURSES
