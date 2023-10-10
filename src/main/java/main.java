@@ -11,14 +11,97 @@ public class main {
         System.out.println("enter name for the school");
         String SchoolName = scanner.nextLine();
 
-
         List<Teacher> teacherList = teacherRecord();
         List<Student> studentList = studentRecord();
         List<Course> courseList = courseRecord();
+        Scanner commandType = new Scanner(System.in);
+        boolean check = true;
+        while (check) {
+
+
+            System.out.print("""Enter number of commend:\n "
+                                 1- ENROLL
+                                 2- ASSIGN
+                                 3-  SHOW COURSES
+                                 4- LOOKUP COURSE
+                                 5- SHOW STUDENTS
+                                 6- LOOKUP STUDENTS
+                                 7- SHOW Teachers
+                                 8- LOOKUP Teachers
+                                 9- SHOW PROFIT
+                                 10- Exit""");
+
+            int choice = commandType.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter Student ID");
+                    System.out.println(studentList.toString());
+                    String student_id_enroll = scanner.next();
+                    System.out.println("Enter Course ID");
+                    System.out.println(courseList.toString());
+                    String course_id_enroll = scanner.next();
+
+                    enrollStudent(student_id_enroll, studentList, course_id_enroll, courseList);
+                    break;
+
+                case 2:
+                    System.out.println("Enter Teacher ID");
+                    System.out.println(teacherList.toString());
+                    String teacher_id_assign = scanner.next();
+                    System.out.println(courseList.toString());
+                    System.out.println("Enter Course ID");
+
+                    String course_id_assign = scanner.next();
+                    assignTeacher(teacher_id_assign, teacherList, course_id_assign, courseList);
+                    break;
+
+                case 3:
+
+                    showCourse(courseList);
+                    break;
+
+                case 4:
+
+                    System.out.println("Enter Course ID");
+                    String course_id = scanner.next();
+                    lookupCourse(course_id, courseList);
+
+                case 5:
+                    showStudent(studentList);
+                    break;
+
+                case 6:
+                    System.out.println("Enter student ID");
+                    String student_id = scanner.next();
+                    lookupStudent(student_id, studentList);
+                    break;
+
+                case 7:
+                    showTeacher(teacherList);
+                    break;
+
+                case 8:
+                    System.out.println("Enter Teacher ID");
+                    String teacher_id = scanner.next();
+                    lookupTeacher(teacher_id, teacherList);
+                    break;
+
+                case 9:
+                    showProfit(courseList, teacherList);
+                    break;
+                case 10 :
+                    System.exit(0);
+                    check=false;
+                    break;
+
+                default:
+                    throw new IllegalStateException("Unexpected value: " + choice);
+            }
+        }
     }
 
     //show profit method
-    public double showProfit(List<Course> courseList, List<Teacher> teachersList) {
+    public static double showProfit(List<Course> courseList, List<Teacher> teachersList) {
         double sumMoney = 0;
         double calculaterSalary = 0;
         for (Course course : courseList) {
@@ -65,7 +148,7 @@ public class main {
             String studentName = scanner.next();
             System.out.println("enter student email " + (i + 1));
             String studentEmail = scanner.next();
-            System.out.println("enter student name " + (i + 1));
+            System.out.println("enter student address " + (i + 1));
             String studentAddress = scanner.next();
             Student temp = new Student(studentName, studentAddress, studentEmail);
             studentList.add(temp);
@@ -77,6 +160,7 @@ public class main {
     // method to create course records
     public static List<Course> courseRecord() {
         Scanner scanner = new Scanner(System.in);
+
 
         System.out.println("course number\n");
         int courseNum = scanner.nextInt();
@@ -145,7 +229,7 @@ public class main {
         System.out.println("courses list of school\n" + courseList.toString() + "\n");
     }
 
-    public void enrollStudent(String studentId, List<Student> studentList, String courseId, List<Course> listCourse) {
+    public static void enrollStudent(String studentId, List<Student> studentList, String courseId, List<Course> listCourse) {
         Student student = lookupStudent(studentId, studentList);
         Course course = lookupCourse(courseId, listCourse);
 
@@ -155,6 +239,7 @@ public class main {
                 System.out.println("Enrollment successful. Student " + student.getName() +
                         " has been enrolled in course " + course.getName());
                 course.setMoney_earned((course.getMoney_earned()) + course.getPrice());
+                System.out.println("the money earn has been update");
             } else {
                 System.out.println("Enrollment failed. Student " + student.getName() +
                         " is already enrolled in a course.");
@@ -165,14 +250,14 @@ public class main {
     }
 
 
-    public void assignTeacher(String teacherId, List<Teacher> teacherList, String courseId, List<Course> listCourse) {
+    public static void assignTeacher(String teacherId, List<Teacher> teacherList, String courseId, List<Course> listCourse) {
         Teacher teacher = lookupTeacher(teacherId, teacherList);
         Course course = lookupCourse(courseId, listCourse);
 
         if (course != null && teacher!= null) {
             if (course.getTeacher() == null ) {
                 course.setTeacher(teacher);
-             //   assert teacher != null;
+                //   assert teacher != null;
                 System.out.println("Assign successful. Teacher " + teacher.getName() +
                         " has been assign to course " + course.getName());
             } else {
