@@ -42,18 +42,17 @@ public class main {
                     System.out.println(courseList.toString());
                     String course_id_enroll = scanner.next();
 
-                    enrollStudent(student_id_enroll, studentList, course_id_enroll, courseList);
+                    SchoolSystem.enrollStudent(student_id_enroll, studentList, course_id_enroll, courseList);
                     break;
 
                 case 2:
                     System.out.println("Enter Teacher ID");
                     System.out.println(teacherList.toString());
                     String teacher_id_assign = scanner.next();
-                    System.out.println(courseList.toString());
                     System.out.println("Enter Course ID");
-
+                    System.out.println(courseList.toString());
                     String course_id_assign = scanner.next();
-                    assignTeacher(teacher_id_assign, teacherList, course_id_assign, courseList);
+                    SchoolSystem.assignTeacher(teacher_id_assign, teacherList, course_id_assign, courseList);
                     break;
 
                 case 3:
@@ -64,8 +63,10 @@ public class main {
                 case 4:
 
                     System.out.println("Enter Course ID");
+                    System.out.println(courseList.toString());
                     String course_id = scanner.next();
-                    lookupCourse(course_id, courseList);
+                   System.out.println(lookupCourse(course_id, courseList));
+                   break;
 
                 case 5:
                     showStudent(studentList);
@@ -73,8 +74,9 @@ public class main {
 
                 case 6:
                     System.out.println("Enter student ID");
+                    System.out.println(studentList.toString());
                     String student_id = scanner.next();
-                    lookupStudent(student_id, studentList);
+                    System.out.println(lookupStudent(student_id, studentList));
                     break;
 
                 case 7:
@@ -83,36 +85,28 @@ public class main {
 
                 case 8:
                     System.out.println("Enter Teacher ID");
+                    System.out.println(teacherList.toString());
                     String teacher_id = scanner.next();
-                    lookupTeacher(teacher_id, teacherList);
+                    System.out.println(lookupTeacher(teacher_id, teacherList));
                     break;
 
                 case 9:
-                    showProfit(courseList, teacherList);
+                    System.out.println(SchoolSystem.showProfit(courseList, teacherList));
                     break;
                 case 10 :
                     System.exit(0);
+                    System.out.println("THE END! thank you for using our System");
                     check=false;
                     break;
 
                 default:
-                    throw new IllegalStateException("Unexpected value: " + choice);
+                    throw new IllegalStateException("Unexpected value!Enter Number between 1-10: " + choice);
             }
         }
     }
 
     //show profit method
-    public static double showProfit(List<Course> courseList, List<Teacher> teachersList) {
-        double sumMoney = 0;
-        double calculaterSalary = 0;
-        for (Course course : courseList) {
-            sumMoney += course.getMoney_earned();
-        }
-        for (Teacher teacher : teachersList) {
-            calculaterSalary += teacher.getSalary();
-        }
-        return sumMoney - calculaterSalary;
-    }
+
 
 
     // method to create teacher records
@@ -230,44 +224,7 @@ public class main {
         System.out.println("courses list of school\n" + courseList.toString() + "\n");
     }
 
-    public static void enrollStudent(String studentId, List<Student> studentList, String courseId, List<Course> listCourse) {
-        Student student = lookupStudent(studentId, studentList);
-        Course course = lookupCourse(courseId, listCourse);
-
-        if (student != null && course != null) {
-            if (student.getCourse() == null) {
-                student.setCourse(course);
-                System.out.println("Enrollment successful. Student " + student.getName() +
-                        " has been enrolled in course " + course.getName());
-                course.setMoney_earned((course.getMoney_earned()) + course.getPrice());
-                System.out.println("the money earn has been update");
-            } else {
-                System.out.println("Enrollment failed. Student " + student.getName() +
-                        " is already enrolled in a course.");
-            }
-        } else {
-            System.out.println("Enrollment failed. Invalid student ID or course ID.");
-        }
-    }
 
 
-    public static void assignTeacher(String teacherId, List<Teacher> teacherList, String courseId, List<Course> listCourse) {
-        Teacher teacher = lookupTeacher(teacherId, teacherList);
-        Course course = lookupCourse(courseId, listCourse);
-
-        if (course != null && teacher!= null) {
-            if (course.getTeacher() == null ) {
-                course.setTeacher(teacher);
-                //   assert teacher != null;
-                System.out.println("Assign successful. Teacher " + teacher.getName() +
-                        " has been assign to course " + course.getName());
-            } else {
-                System.out.println("Assign failed. Teacher " + teacher.getName() +
-                        " is already assign in a course.");
-            }
-        } else {
-            System.out.println("Assign failed. Invalid teacher ID or course ID.");
-        }
-    }
 
 }

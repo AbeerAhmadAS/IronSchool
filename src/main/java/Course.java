@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.UUID;
 
 
@@ -41,6 +40,7 @@ public class Course {
 
     public void setMoney_earned(double money_earned) {
         this.money_earned = money_earned;
+
     }
 
     public Teacher getTeacher() {
@@ -52,14 +52,22 @@ public class Course {
         this.teacher = teacher;
     }
 
-    @Override
-    public String toString() {
+
+    public String toString2() {
         return "Course{" +
                 "courseId='" + courseId + '\'' +
                 ", name='" + name + '\'' +
-                ", price=" + price +
-                ", teacher=" + teacher +
                 '}';
+    }
+
+   @Override
+    public String toString() {
+        return "\n Course {" +
+                  "courseId='" + courseId + '\'' +
+                  ",name='" + name + '\'' +
+                  ",price=" + price +
+                  ",teacher=" + teacher +
+                  '}'+'\n';
     }
 
 }
