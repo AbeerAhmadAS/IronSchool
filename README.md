@@ -14,8 +14,9 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+          <li><a href="## Classes">Classes</a></li>
+          <li><a href="### Prerequisites">Prerequisites</a></li>
+          <li><a href="## Commands">Commands</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -30,7 +31,7 @@
 ## About The Project
 
 
-The IronBattle Simulator is a Java-based application that allows users to create and customize warriors and wizards, simulate battles between them, and determine the winner. The project consists of three main classes: Character, Warrior, Wizard, and BattleField as well as an Attacker interface.
+This is a Java application that allows you to manage a school system. It provides functionality for creating teachers, courses, and students, as well as performing actions like enrolling students in courses and assigning teachers to courses and connect student to teacher.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -38,7 +39,7 @@ The IronBattle Simulator is a Java-based application that allows users to create
 ### Built With
 
 
-* [![Java][Java]][Java-url]
+* [![Java language][Java]][Java-url]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -55,25 +56,38 @@ The IronBattle Simulator is a Java-based application that allows users to create
 - [IntelliJ IDEA](https://www.jetbrains.com/idea/): A powerful integrated development environment (IDE) for Java development.
 - [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-downloads.html): Java development tools and libraries.
 
-### Installation
-
-1. Clone the repo
   
-sh
-   git clone https://github.com/your_username_/Project-Name.git
-   
 
- 2. Navigate to the BattleField.java file:
+  
+## Classes
 
-   Once inside the BattleField.java file, locate the main method. Next to the main method declaration, you should see a green triangle or play icon (depending on your IDE). Click on this icon to execute the program.
+The application consists of the following main classes:
 
-   
+- Teacher: Represents a teacher with properties such as teacher ID, name, and salary.
+- Course: Represents a course with properties such as course ID, name, price, and the teacher assigned to it.
+- Student: Represents a student with properties such as student ID, name, address, email, and the course they are enrolled in.
+- SchoolSystem: The main class that manages the school system, including adding teachers, courses, and students, and executing some of commands.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Commands
+
+The application supports the following commands:
+
+- ENROLL [STUDENT_ID] [COURSE_ID]: Enrolls a student in a specific course.
+- ASSIGN [TEACHER_ID] [COURSE_ID]: Assigns a teacher to a specific course.
+- SHOW COURSES: Displays a list of all courses.
+- LOOKUP COURSE [COURSE_ID]: Displays the full details of a specific course.
+- SHOW STUDENTS: Displays a list of all students.
+- LOOKUP STUDENT [STUDENT_ID]: Displays the full details of a specific student.
+- SHOW TEACHERS: Displays a list of all teachers.
+- LOOKUP TEACHER [TEACHER_ID]: Displays the full details of a specific teacher.
+- CONNECT [TEACHER_ID] [STUDENT_ID]: connect a teacher to a specific student.
+- SHOW PROFIT: Calculates and displays the profit of the school system.
 
 
 
-<!-- USAGE EXAMPLES -->
+
+
+
 ## Usage
 
 ### Demo
@@ -84,25 +98,17 @@ sh
 
 
 
-<!-- ROADMAP -->
-## Roadmap
 
-- [x] Navigate through a text-based menu using Standard Input and Output.
-- [x] Create warriors and wizards individually customizing their stats and name.
-- [x] Have a battle between the characters and determines the winner.
-- [x] Keep a detailed log (on the standard output) of every action taken during the duels
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- Team members -->
 ## Team members
-- [Muhannad](https://github.com/MemZhr)
+- [Abeer](https://github.com/AbeerAhmadAS)
 - [Hadeel](https://github.com/HadeelNaif)
-- [Samah](https://github.com/SamahZughaibi)
-- [Sadeem](https://github.com/sadoma2000)
-- [Afaf](https://github.com/afaf99)
-- [Dhuha](https://github.com/DhuhaAhmad)
+- [Jawaher](https://github.com/jawahermut)
+- [Amal](https://github.com/sadoma2000)
+- [Jehan](https://github.com/afaf99)
+
  
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
