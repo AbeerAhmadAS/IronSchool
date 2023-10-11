@@ -22,7 +22,13 @@ public class SchoolSystem {
     public void courseRecord(Course course){
         courses.add(course);
     }
+    public List<Course> getCourses() {
+        return courses;
+    }
 
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
 
     public static void enrollStudent(String studentId, List<Student> studentList, String courseId, List<Course> listCourse) {
         Student student = main.lookupStudent(studentId, studentList);
@@ -35,10 +41,10 @@ public class SchoolSystem {
                         " has been enrolled in course " + course.getName());
                 course.setMoney_earned((course.getMoney_earned()) + course.getPrice());
                 double updateEarned =course.getMoney_earned();
-                System.out.println("the money earn has been update"+ updateEarned);
+                System.out.println("the money earn has been update  "+ updateEarned);
 
             } else {
-                System.out.println("Enrollment failed. Student " + student.getName() +
+                System.out.println("Enrollment failed. Student  " + student.getName() +
                         " is already enrolled in a course.");
             }
         } else {
@@ -46,14 +52,7 @@ public class SchoolSystem {
         }
     }
 
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
-
+    // ASSIGN TEACHER TO COURSE METHOD
     public static void assignTeacher(String teacherId, List<Teacher> teacherList, String courseId, List<Course> listCourse) {
         Teacher teacher = main.lookupTeacher(teacherId, teacherList);
         Course course = main.lookupCourse(courseId, listCourse);
@@ -62,16 +61,17 @@ public class SchoolSystem {
             if (course.getTeacher() == null ) {
                 course.setTeacher(teacher);
                 //   assert teacher != null;
-                System.out.println("Assign successful. Teacher " + teacher.getName() +
+                System.out.println("Assign successful. Teacher  " + teacher.getName() +
                         " has been assign to course " + course.getName());
             } else {
-                System.out.println("Assign failed. Teacher " + teacher.getName() +
+                System.out.println("Assign failed. Teacher  " + teacher.getName() +
                         " is already assign in a course.");
             }
         } else {
             System.out.println("Assign failed. Invalid teacher ID or course ID.");
         }
     }
+    //show profit method
     public static double showProfit(List<Course> courseList, List<Teacher> teachersList) {
         double sumMoney = 0;
         double calculaterSalary = 0;
