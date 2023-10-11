@@ -91,7 +91,7 @@ The application supports the following commands:
 ## Usage
 
 ### Demo
-![Demo GIF](https://drive.google.com/uc?export=view&id=10uuI582CICq9HE9pu4M2sMwJ7gjTJBSg)
+![Demo GIF](https://drive.google.com/file/d/13IEYw4QQn1k3q4e3jgfBcx5oRgJ65XjG/view?usp=sharing)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
