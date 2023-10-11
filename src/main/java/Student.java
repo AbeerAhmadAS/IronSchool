@@ -6,11 +6,20 @@ public class Student {
     private String address;
     private String email;
     private Course course;
+    private Teacher teacher;
 
     public Student(String name, String address, String email) {
         this.name = name;
         this.address = address;
         this.email = email;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     public String getStudentId() {
@@ -52,13 +61,14 @@ public class Student {
 
     @Override
     public String toString() {
-        return "\nStudent {" +
-                  "studentId='" + studentId + '\'' +
-                  ",name='" + name + '\'' +
-                  ",address='" + address + '\'' +
-                  ",email='" + email + '\'' +
-                  ",course=" + course +
-                  '}'+'\n';
+        return "\n Student{" +
+                "  studentId='" + studentId + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", course=" + course +
+                ", teacher=" + teacher +
+                '}'+'\n';
     }
 }
 

@@ -71,6 +71,24 @@ public class SchoolSystem {
             System.out.println("Assign failed. Invalid teacher ID or course ID.");
         }
     }
+    //CONNECT THE STUDENT WITH THE TEACHER TO EVALUATE PERFORMANCE
+    public static void connectStudent(String teacherId, List<Teacher> teacherList, String studentId, List<Student> studentList) {
+        Teacher teacher = main.lookupTeacher(teacherId, teacherList);
+        Student student = main.lookupStudent(studentId, studentList);
+        if (student != null && teacher!= null) {
+            if (student.getTeacher() == null ) {
+                student.setTeacher(teacher);
+                //   assert teacher != null;
+                System.out.println("connect successful. Teacher  " + teacher.getName() +
+                        " has been connect with Student  " + student.getName());
+            } else {
+                System.out.println("connect failed. Teacher  " + teacher.getName() +
+                        " is already connected with Student.");
+            }
+        } else {
+            System.out.println("connect failed. Invalid teacher ID or Student ID.");
+        }
+    }
     //show profit method
     public static double showProfit(List<Course> courseList, List<Teacher> teachersList) {
         double sumMoney = 0;

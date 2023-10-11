@@ -1,15 +1,21 @@
-
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class main {
 
     public static void main(String[] args) {
-        System.out.println("Welcome to School System!!");
+        System.out.println("********************** Welcome to School System!! **********************");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("enter name for the school");
+        System.out.println("Enter name for the school");
         String SchoolName = scanner.nextLine();
+
+        while (!SchoolName.matches("[A-Za-z\\s]+") || SchoolName.length() <= 3) {
+            System.out.println("Please enter valid name");
+            System.out.println("Enter name for the school");
+            SchoolName = scanner.next();
+        }
 
         List<Teacher> teacherList = teacherRecord();
         List<Student> studentList = studentRecord();
@@ -20,7 +26,7 @@ public class main {
 
             //start the commands
             System.out.println( """
-                                  Enter number of commend:
+                                 Enter number of commend:
                                  1- ENROLL
                                  2- ASSIGN
                                  3- SHOW COURSES
@@ -30,7 +36,8 @@ public class main {
                                  7- SHOW Teachers
                                  8- LOOKUP Teachers
                                  9- SHOW PROFIT
-                                 10- Exit""");
+                                 10-Connect
+                                 11- Exit""");
 
             int choice = scanner.nextInt();
             switch (choice) {
@@ -66,8 +73,8 @@ public class main {
                     System.out.println("Enter Course ID: ");
                     System.out.println(courseList.toString());
                     String course_id = scanner.next();
-                   System.out.println(lookupCourse(course_id, courseList));
-                   break;
+                    System.out.println(lookupCourse(course_id, courseList));
+                    break;
 
                 case 5:
                     //SHOW STUDENT
@@ -99,16 +106,26 @@ public class main {
                     //SHOW THE PROFIT
                     System.out.println(SchoolSystem.showProfit(courseList, teacherList));
                     break;
-                case 10 :
+                case 10:
+                    //CONNECT THE STUDENT WITH THE TEACHER TO EVALUATE PERFORMANCE
+                    System.out.println("Enter Student ID: ");
+                    System.out.println(studentList.toString());
+                    String student_id_connect = scanner.next();
+                    System.out.println("Enter Teacher ID: ");
+                    System.out.println(teacherList.toString());
+                    String teacher_id_connect = scanner.next();
+                    SchoolSystem.connectStudent( teacher_id_connect, teacherList, student_id_connect, studentList);
+                    break;
+                case 11 :
                     //EXIT THE SYSTEM
-                    System.exit(0);
-                    System.out.println("THE END! Thank you for using our System");
-                    System.out.println("Regards, Abeer, Hadeel, Amal, Jawaher, Jehan ");
+                    System.out.println("********************** THE END! Thank you for using our System **********************");
+                    System.out.println("********************** Regards, Abeer, Hadeel, Amal, Jawaher, Jehan ********************** ");
                     check=false;
+                    System.exit(0);
                     break;
 
                 default:
-                    throw new IllegalStateException("Unexpected value!Enter Number between 1-10: " + choice);
+                    System.out.println("Unexpected value! Enter Number between 1-10: " + choice + "\n");
             }
         }
     }
@@ -116,18 +133,56 @@ public class main {
     // method to create teacher records
     public static List<Teacher> teacherRecord() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("How many teachers in your School ? ");
-        int TeacherNum = scanner.nextInt();
+        int teacherNum= 0;
+        double teacherSalary = 0 ;
+        boolean checkInput = true;
+        while (checkInput){
+            System.out.println("How many teachers in your School ? ");
+            String teacherNumber = scanner.next();
+            try {
+                teacherNum = Integer.parseInt(teacherNumber);
+            }catch (NumberFormatException e){}
+
+            if (teacherNum < 0 ){
+                System.out.println("The number must be positive");
+            } else if (teacherNum >= 0) {
+                checkInput = false;
+            } else {
+                System.out.println("Invalid input! Try again");
+            }
+        }
+        checkInput = true;
 
         List<Teacher> teacherList = new ArrayList<Teacher>();
 
-        for (int i = 0; i < TeacherNum; i++) {
+        for (int i = 0; i < teacherNum; i++) {
             System.out.println("Enter name of teacher " + (i + 1));
             String teacherName = scanner.next();
-            System.out.println("Enter Salary of the teacher:  ");
-            double teacherSalary = scanner.nextDouble();
+            while (!teacherName.matches("[A-Za-z\\s]+") || teacherName.length() <= 3) {
+                System.out.println("Please enter valid name");
+                System.out.println("Enter name of teacher " + (i + 1));
+                teacherName = scanner.next();
+            }
+
+            while (checkInput){
+                System.out.println("Enter Salary of the teacher:  ");
+                String inputTeacherSalary = scanner.next();
+                try {
+                    teacherSalary = Double.parseDouble(inputTeacherSalary);
+                }catch (NumberFormatException e){}
+
+                if (teacherSalary < 0 ){
+                    System.out.println("The salary must be positive");
+                } else if (teacherSalary > 0) {
+                    checkInput = false;
+                } else {
+                    System.out.println("Invalid input! Try again");
+                }
+            }
+
             Teacher temp = new Teacher(teacherName, teacherSalary);
             teacherList.add(temp);
+            checkInput = true;
         }
         showTeacher(teacherList);
         return teacherList;
@@ -136,17 +191,41 @@ public class main {
     // method to create student records
     public static List<Student> studentRecord() {
         Scanner scanner = new Scanner(System.in);
+        int studentNum= 0;
+        boolean checkInput = true;
+        while (checkInput){
+            System.out.println("How many students in your School ? ");
+            String studentNumber = scanner.next();
+            try {
+                studentNum = Integer.parseInt(studentNumber);
+            }catch (NumberFormatException e){}
 
-        System.out.println("How many students in your School ? \n");
-        int studentNum = scanner.nextInt();
-
+            if (studentNum < 0 ){
+                System.out.println("The number must be positive");
+            } else if (studentNum >= 0) {
+                checkInput = false;
+            } else {
+                System.out.println("Invalid input! Try again");
+            }
+        }
         List<Student> studentList = new ArrayList<Student>();
 
         for (int i = 0; i < studentNum; i++) {
             System.out.println("Enter the name of Student " + (i + 1));
             String studentName = scanner.next();
+            while (!studentName.matches("[A-Za-z\\s]+") || studentName.length() <= 3) {
+                System.out.println("Please enter valid name");
+                System.out.println("Enter name of Student " + (i + 1));
+                studentName = scanner.next();
+            }
+
             System.out.println("Enter Email of Student " + (i + 1));
             String studentEmail = scanner.next();
+            while (!studentEmail.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+                System.out.println("Invalid email ! Try again");
+                System.out.println("Enter Email of Student " + (i + 1));
+                studentEmail = scanner.next();
+            }
             System.out.println("Enter the address of Student " + (i + 1));
             String studentAddress = scanner.next();
             Student temp = new Student(studentName, studentAddress, studentEmail);
@@ -159,21 +238,57 @@ public class main {
     // method to create course records
     public static List<Course> courseRecord() {
         Scanner scanner = new Scanner(System.in);
+        int courseNum= 0;
+        double coursePrice = 0;
+        boolean checkInput = true;
+        while (checkInput){
+            System.out.println("How many courses in your School ? ");
+            String courseNumber = scanner.next();
+            try {
+                courseNum = Integer.parseInt(courseNumber);
+            }catch (NumberFormatException e){}
 
-
-        System.out.println("How many courses in your School ? \n");
-        int courseNum = scanner.nextInt();
+            if (courseNum < 0 ){
+                System.out.println("The number must be positive");
+            } else if (courseNum >= 0) {
+                checkInput = false;
+            } else {
+                System.out.println("Invalid input");
+            }
+        }
+        checkInput = true;
 
         List<Course> courseList = new ArrayList<Course>();
 
         for (int i = 0; i < courseNum; i++) {
             System.out.println("Enter the name of Course " + (i + 1));
             String courseName = scanner.next();
-            System.out.println("enter the price of Course " + (i + 1));
-            double coursePrice = scanner.nextDouble();
+
+            while (!courseName.matches("[A-Za-z\\s]+") || courseName.length() < 3) {
+                System.out.println("Please enter valid name");
+                System.out.println("Enter the name of Course " + (i + 1));
+                courseName = scanner.next();
+            }
+
+            while (checkInput){
+                System.out.println("Enter the price of Course " + (i + 1));
+                String inputCoursePrice = scanner.next();
+                try {
+                    coursePrice = Double.parseDouble(inputCoursePrice);
+                }catch (NumberFormatException e){}
+
+                if (coursePrice < 0 ){
+                    System.out.println("The price must be positive");
+                } else if (coursePrice > 0) {
+                    checkInput = false;
+                } else {
+                    System.out.println("Invalid input");
+                }
+            }
 
             Course temp = new Course(courseName, coursePrice);
             courseList.add(temp);
+            checkInput = true;
         }
         showCourse(courseList);
         return courseList;
@@ -215,16 +330,16 @@ public class main {
 
     // SHOW TEACHER method
     public static void showTeacher(List<Teacher> teacherList) {
-        System.out.println("teacher list of school\n" + teacherList.toString() + "\n");
+        System.out.println("Teachers list of school\n" + teacherList.toString() + "\n");
     }
 
     // SHOW STUDENT method
     public static void showStudent(List<Student> studentList) {
-        System.out.println("Student list of school\n" + studentList.toString() + "\n");
+        System.out.println("Students list of school\n" + studentList.toString() + "\n");
     }
 
     //SHOW COURSES method
     public static void showCourse(List<Course> courseList) {
-        System.out.println("courses list of school\n" + courseList.toString() + "\n");
+        System.out.println("Courses list of school\n" + courseList.toString() + "\n");
     }
 }

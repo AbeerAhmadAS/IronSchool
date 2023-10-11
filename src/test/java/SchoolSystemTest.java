@@ -90,4 +90,22 @@ class SchoolSystemTest {
         assertEquals(teacherTest.get(0), courseTest.get(0).getTeacher());
     }
 
+    @Test
+    void connectTest() {
+
+        Teacher t1 = new Teacher("omar", 200);
+        List<Teacher> teacherTest = new ArrayList<Teacher>() {
+            {
+                add(t1);
+            } };
+
+
+        Student s1 = new Student("Ahmad", "KSA","Ahmad@gmai.com");
+        List<Student> studentTest = new ArrayList<Student>() {{
+            add(s1);
+        }};
+
+        schoolSystem.connectStudent( t1.getTeacherId(), teacherTest, s1.getStudentId(), studentTest );
+        assertEquals(teacherTest.get(0), studentTest.get(0).getTeacher());
+    }
 }
