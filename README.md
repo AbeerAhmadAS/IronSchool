@@ -105,8 +105,8 @@ To see a demo of the project, you can download the PDF file from [here](https://
 - [Abeer](https://github.com/AbeerAhmadAS)
 - [Hadeel](https://github.com/HadeelNaif)
 - [Jawaher](https://github.com/jawahermut)
-- [Amal](https://github.com/sadoma2000)
-- [Jehan](https://github.com/afaf99)
+- [Amal](https://github.com/AmalHassanAlmaabady)
+- [Jehan](https://github.com/JehanYahya)
 
  
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
